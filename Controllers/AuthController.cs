@@ -6,14 +6,18 @@ using System.Web.Mvc;
 
 namespace final_exam_app.Controllers
 {
-    public class UserController : Controller
+    public class AuthController : Controller
     {
-        // GET: User
-        public ActionResult Index()
+        // GET: Auth
+        public ActionResult Login()
         {
             return View();
         }
-        public ActionResult Detail(int object_id=0)
+        public ActionResult Regsiter()
+        {
+            return View();
+        }
+        public ActionResult DisplayAuth()
         {
             return View();
         }
