@@ -77,3 +77,7 @@ C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\obj\Debug\final_exam_app.csproj.CoreCo
 C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\obj\Debug\final_exam_app.csproj.CopyComplete
 C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\obj\Debug\final_exam_app.dll
 C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\obj\Debug\final_exam_app.pdb
+C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\bin\EntityFramework.dll
+C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\bin\EntityFramework.SqlServer.dll
+C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\bin\EntityFramework.xml
+C:\IT\do_an_cuoi_ky_asp.net\do_an_cuoi_ky\bin\EntityFramework.SqlServer.xml
