@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="learn_aps.netModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="bill">
+    <Key>
+      <PropertyRef Name="bill_id" />
+    </Key>
+    <Property Name="bill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bill_date" Type="DateTime" Precision="0" />
+    <Property Name="order_id" Type="Int32" />
+    <NavigationProperty Name="order_" Relationship="Self.FK_bill_order_" FromRole="bill" ToRole="order_" />
+  </EntityType>
+  <EntityType Name="brand">
+    <Key>
+      <PropertyRef Name="brand_id" />
+    </Key>
+    <Property Name="brand_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product" Relationship="Self.FK_product_brand" FromRole="brand" ToRole="product" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="parent_id" Type="Int32" />
+    <NavigationProperty Name="product" Relationship="Self.FK_product_category" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="order_">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="total_amount" Type="Int32" />
+    <NavigationProperty Name="bill" Relationship="Self.FK_bill_order_" FromRole="order_" ToRole="bill" />
+    <NavigationProperty Name="product" Relationship="Self.FK_order__product" FromRole="order_" ToRole="product" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_order__Users" FromRole="order_" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="brand_id" Type="Int32" />
+    <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="size" Type="Int32" />
+    <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="material" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="brand" Relationship="Self.FK_product_brand" FromRole="product" ToRole="brand" />
+    <NavigationProperty Name="category" Relationship="Self.FK_product_category" FromRole="product" ToRole="category" />
+    <NavigationProperty Name="order_" Relationship="Self.FK_order__product" FromRole="product" ToRole="order_" />
+  </EntityType>
+  <EntityType Name="provider">
+    <Key>
+      <PropertyRef Name="provider_id" />
+    </Key>
+    <Property Name="provider_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="number_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="password_" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="birthday" Type="DateTime" Precision="0" />
+    <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="desc_" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="is_admin" Type="Boolean" />
+    <Property Name="cmnd" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="order_" Relationship="Self.FK_order__Users" FromRole="Users" ToRole="order_" />
+  </EntityType>
+  <Association Name="FK_bill_order_">
+    <End Role="order_" Type="Self.order_" Multiplicity="1" />
+    <End Role="bill" Type="Self.bill" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="order_">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="bill">
+        <PropertyRef Name="bill_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_brand">
+    <End Role="brand" Type="Self.brand" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="brand">
+        <PropertyRef Name="brand_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="brand_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_product_category">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order__product">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="order_" Type="Self.order_" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="order_">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_order__Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="order_" Type="Self.order_" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="order_">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="bill" EntityType="Self.bill" />
+    <EntitySet Name="brand" EntityType="Self.brand" />
+    <EntitySet Name="category" EntityType="Self.category" />
+    <EntitySet Name="order_" EntityType="Self.order_" />
+    <EntitySet Name="product" EntityType="Self.product" />
+    <EntitySet Name="provider" EntityType="Self.provider" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_bill_order_" Association="Self.FK_bill_order_">
+      <End Role="order_" EntitySet="order_" />
+      <End Role="bill" EntitySet="bill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_brand" Association="Self.FK_product_brand">
+      <End Role="brand" EntitySet="brand" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_product_category" Association="Self.FK_product_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order__product" Association="Self.FK_order__product">
+      <End Role="product" EntitySet="product" />
+      <End Role="order_" EntitySet="order_" />
+    </AssociationSet>
+    <AssociationSet Name="FK_order__Users" Association="Self.FK_order__Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="order_" EntitySet="order_" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

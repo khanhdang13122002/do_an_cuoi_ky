@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/auth.css" />
+ @*   <link rel="stylesheet" href="~/Content/bootstrap.css"/>*@
+    <title>Get Started</title>
+
+</head>
+<body>
+
+    <span class="loader-container">
+        <span class="loader">
+            <span class="loader-inner"></span><br />
+        </span>
+        <span class="loading-text" style="font-size: 10px; font-weight: 500; color: #5995fd;">Loadding...</span>
+    </span>
+    @RenderBody()
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/auth.js"></script>
+</body>
+</html>
