@@ -10,6 +10,8 @@ namespace final_exam_app.Models.DAO
         //hàm đăng nhập
         public Users Login(string email_,string pass_) {
             return db_.Users.Where(us => us.email.Equals(email_)&&us.password_.Equals(pass_)).FirstOrDefault();
+           /* khong nen dung == dung equal */
+           //dùng == dễ gây ra sql introjection (đánh cắp dữ liệu) ví dụ or 1=1(thế này bằng với select * fom table)=> mất dữ liệu 
         }
         //Hàm đăng ký
         public bool Res(string email_,string pass_)
@@ -23,13 +25,15 @@ namespace final_exam_app.Models.DAO
                 };
                 db_.Users.Add(us_);
                 db_.SaveChanges();
-                return true;
+                return true; 
             }catch(Exception ex)
             {
                 return false;
             }
 
         }
+       /* ham nay lay ra use (neuco thi se khong dk duoc))*/
+       //ok chưa?
         public Users getUserByEmails(string email)
         {
             return db_.Users.Where(us => us.email.Equals(email)).FirstOrDefault();

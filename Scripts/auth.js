@@ -90,6 +90,7 @@ $("#btnRes").click(() => {
         Res(resEmail, resPassword);
     }
 })
+/*ham nay check email neu ton tai roi thi khong dang ky duoc */
 function getEmail(email) {
     check = true;
     $.ajax({

@@ -24,6 +24,8 @@ namespace final_exam_app.Controllers
             if (us!=null)
             {
                 int id =us.user_id;
+                /*tra ve id
+                    nho la ajax phai tra ve json*/
                 return Json(id, JsonRequestBehavior.AllowGet);
 
             }
